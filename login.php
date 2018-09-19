@@ -1,5 +1,15 @@
 <?php
 session_start();
+?>
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+	<title>Den hemliga sidan</title>
+</head>
+<body>
+<?php
 if (isset($_POST['submit'])) 
 {
 	$loginCredentials = [
@@ -15,12 +25,15 @@ if (isset($_POST['submit']))
 		echo $password;
 
 
-		if($username == $loginCredentials['username']
-			&& $password == md5($loginCredentials['password'])){
+		if($username == $loginCredentials['username'] && $password == password_verify($password, $loginCredentials['password']))
+		{
 			echo "<h1>Welcome to the dark side</h1>";
-		}elseif ($username != $loginCredentials['username'] || $password != $loginCredentials['password']) {
+		}
+		elseif ($username != $loginCredentials['username'] || $password != $loginCredentials['password']) {
+
 				echo "<h1>Du har angivit fel användarnamn eller lösenord blyat</h1>";
 		}
+
 		else{
 			
 		}
@@ -41,3 +54,5 @@ else
 
 
 ?>
+</body>
+</html>
